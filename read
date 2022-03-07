@@ -1,0 +1,72 @@
+EDIT:
+
+Voici les 3 solutions que j'ai trouvée afin d'afficher un fichier PDF à travers une balise HTML
+
+1.
+
+<div class="container">
+        <object data="https://github.com/mozilla/pdf.js/blob/master/test/pdfs/tracemonkey.pdf" type="application/pdf" typemustmatch>   
+    </div>
+2.
+
+    <div class="container">
+        <iframe src="https://github.com/mozilla/pdf.js/blob/master/test/pdfs/tracemonkey.pdf&embedded=true"></iframe>
+    </div>
+3.
+
+<div class="container">
+        <embed src="https://github.com/mozilla/pdf.js/blob/master/test/pdfs/tracemonkey.pdf" type="application/pdf" width="100%" height="100%">   
+    </div>
+Les 3 ne fonctionnent pas, j'ai le droit à un github.com n'autorise pas la connexion.
+
+Maintenant en essayant avec l'API Google
+
+    <div class="container">
+        <object data="https://docs.google.com/viewer?url=https://github.com/mozilla/pdf.js/blob/master/test/pdfs/tracemonkey.pdf&embedded=true" type="application/pdf" typemustmatch>   
+    </div>
+    <div class="container">
+        <iframe src="https://docs.google.com/viewer?url=https://github.com/mozilla/pdf.js/blob/master/test/pdfs/tracemonkey.pdf&embedded=true"></iframe>
+    </div>
+    <div class="container">
+        <embed src="https://docs.google.com/viewer?url=https://github.com/mozilla/pdf.js/blob/master/test/pdfs/tracemonkey.pdf&embedded=true" type="application/pdf" width="100%" height="100%">   
+    </div>
+Les 3 façons se trouvent bloqué en essayant de récupérer le PDF via github, donc là on peut se dire que c'est github qui nous bloquent 
+et donc si je veux contourner ce problème je n'ai qu'à prendre ce PDF sur un autre site ou simplement je le télécharge et affiche grâce à 
+asset mais là encore ça ne fonctionne pas
+
+1.
+
+<div class="container">
+        <object data="https://docs.google.com/viewer?url={{ asset('build/images/tracemonkey.pdf') }}&embedded=true" type="application/pdf" typemustmatch>   
+    </div>
+2. (problme de rendu)
+
+<div class="container">
+        <iframe src="https://docs.google.com/viewer?url={{ asset('build/images/tracemonkey.pdf') }}&embedded=true"></iframe>
+    </div>
+3.
+
+<div class="container">
+        <embed src="https://docs.google.com/viewer?url={{ asset('build/images/tracemonkey.pdf') }}&embedded=true" type="application/pdf" width="100%" height="100%">   
+    </div>
+La solution 1 et 3 n'affiche carrément rien (comme si c'était en display none) et la solution 2 me dit qu'il ne peut pas afficher le contenu
+
+Alors, j'ai re tenté encore une fois de modifier l'url ??
+
+1.
+
+<div class="container">
+        <object data="{{ asset('build/images/tracemonkey.pdf') }}" type="application/pdf" typemustmatch>   
+    </div>
+2.
+
+    <div class="container">
+        <iframe src="{{ asset('build/images/tracemonkey.pdf') }}"></iframe>
+    </div>
+3.
+
+    <div class="container">
+        <embed src="{{ asset('build/images/tracemonkey.pdf') }}" type="application/pdf" width="100%" height="100%">   
+    </div>
+La solution 1 n'affiche absolument rien tandis que la solution 2 et 3 m'affiche une erreur de route comme si je chemin n'étais pas bon
+Auriez vous une idée svp pour m'aider ? et enfin afficher ce pdf ^^
